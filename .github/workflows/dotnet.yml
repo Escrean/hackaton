@@ -10,17 +10,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services: 
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: tech-challenge
-          POSTGRES_PASSWORD: tech-challenge
-          POSTGRES_DB: tech-challenge
-        ports:
-          - 5432:5432
-        options: > 
-          --health-cmd="pg_isready -U tech-challenge"
+    # services: 
+      # postgres:
+      #   image: postgres:latest
+      #   env:
+      #     POSTGRES_USER: tech-challenge
+      #     POSTGRES_PASSWORD: tech-challenge
+      #     POSTGRES_DB: tech-challenge
+      #   ports:
+      #     - 5432:5432
+      #   options: > 
+      #     --health-cmd="pg_isready -U tech-challenge"
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -37,15 +37,15 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
    
-    - name: Docker Login
-      uses: docker/login-action@v3.2.0
-      with:
-        username: ${{ secrets.DOCKER_LOGIN }}
-        password: ${{ secrets.DOCKER_PASS }}
+    # - name: Docker Login
+    #   uses: docker/login-action@v3.2.0
+    #   with:
+    #     username: ${{ secrets.DOCKER_LOGIN }}
+    #     password: ${{ secrets.DOCKER_PASS }}
     
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v5.4.0
-      with:
-        context: .
-        tags: 'escorpion559/tech-challenge:latest'
-        push: true
+    # - name: Build and push Docker images
+    #   uses: docker/build-push-action@v5.4.0
+    #   with:
+    #     context: .
+    #     tags: 'escorpion559/tech-challenge:latest'
+    #     push: true
